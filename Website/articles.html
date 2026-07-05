@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal — Ritual & Stone Studio</title>
+  <meta name="description" content="Luxury bathroom design insights, material guides, and renovation wisdom from Ritual & Stone Studio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --canvas:        #2A2820;
+      --canvas-card:   #353325;
+      --cream:         #EEEAE1;
+      --text-dark:     #3C3926;
+      --text-mid:      #6B6453;
+      --text-muted:    #9B9482;
+      --accent:        #8B6B48;
+      --offwhite:      #F0EDE5;
+      --dimwhite:      #C8C4B2;
+      --olive-subtle:  rgba(255,255,255,0.06);
+      --border:        rgba(200,196,178,0.12);
+      --cinzel:  'Cinzel', 'Times New Roman', serif;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'DM Sans', system-ui, sans-serif;
+      --radius-card:   12px;
+      --radius-pill:   40px;
+      --max-w:         1100px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--canvas); color: var(--cream); font-family: var(--sans); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4 { font-weight: 400; line-height: 1.1; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* NAV */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 22px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(42,40,32,0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-logo { font-family: var(--cinzel); font-size: 12px; letter-spacing: 3.5px; color: var(--offwhite); }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--dimwhite); padding: 8px 18px; border-radius: var(--radius-pill); transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--offwhite); background: var(--olive-subtle); }
+    .nav-cta { font-size: 13px; color: var(--offwhite); background: var(--accent); padding: 10px 26px; border-radius: var(--radius-pill); transition: opacity 0.2s, transform 0.15s; }
+    .nav-cta:hover { opacity: 0.82; transform: translateY(-1px); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 180px 48px 88px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow-accent { font-size: 10px; letter-spacing: 4px; color: var(--accent); margin-bottom: 24px; display: block; }
+    .page-title { font-family: var(--serif); font-size: clamp(44px, 6vw, 76px); font-weight: 300; font-style: italic; color: var(--offwhite); line-height: 1.1; }
+    .page-sub { font-size: 15px; color: var(--dimwhite); margin-top: 24px; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.75; }
+
+    /* FEATURED ARTICLE */
+    .featured-section { padding: 88px 48px 0; }
+    .featured-inner { max-width: var(--max-w); margin: 0 auto; }
+
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--canvas-card);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+      cursor: pointer;
+    }
+    .featured-card:hover { border-color: rgba(200,196,178,0.28); }
+    .featured-card:hover .featured-img { transform: scale(1.03); }
+
+    .featured-img-wrap { overflow: hidden; aspect-ratio: 4/3; }
+    .featured-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+
+    .featured-body {
+      padding: 56px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .article-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .article-tag { font-size: 9px; letter-spacing: 3px; color: var(--accent); background: rgba(139,107,72,0.12); padding: 5px 12px; border-radius: 20px; }
+    .article-date { font-size: 12px; color: var(--text-muted); }
+    .featured-title {
+      font-family: var(--serif);
+      font-size: clamp(26px, 2.6vw, 36px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--offwhite);
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+    .featured-excerpt { font-size: 14px; line-height: 1.8; color: var(--dimwhite); margin-bottom: 36px; }
+    .read-more {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; letter-spacing: 1.5px; color: var(--offwhite);
+      transition: gap 0.2s;
+    }
+    .read-more:hover { gap: 16px; }
+    .read-more::after { content: '→'; }
+
+    /* ARTICLE GRID */
+    .grid-section { padding: 64px 48px 0; }
+    .grid-inner { max-width: var(--max-w); margin: 0 auto; }
+    .grid-label { font-size: 10px; letter-spacing: 4px; color: var(--text-muted); margin-bottom: 36px; display: block; border-top: 1px solid var(--border); padding-top: 36px; }
+    .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+
+    .article-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--canvas-card);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .article-card:hover { border-color: rgba(200,196,178,0.28); }
+    .article-card:hover .card-img { transform: scale(1.04); }
+
+    .card-img-wrap { overflow: hidden; aspect-ratio: 3/2; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+
+    .card-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
+    .card-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .card-title {
+      font-family: var(--serif);
+      font-size: clamp(18px, 1.8vw, 22px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--offwhite);
+      line-height: 1.35;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+    .card-excerpt { font-size: 13px; line-height: 1.75; color: var(--dimwhite); margin-bottom: 24px; }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; letter-spacing: 1.5px; color: var(--accent);
+      margin-top: auto; transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 14px; }
+    .card-link::after { content: '→'; }
+
+    /* CTA */
+    .cta-section {
+      margin: 96px 48px 0;
+      background: var(--canvas-card);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 88px 48px;
+      text-align: center;
+      max-width: var(--max-w);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-section { margin: 96px auto 0; padding: 88px 48px; max-width: var(--max-w); }
+    .cta-eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--accent); margin-bottom: 20px; display: block; }
+    .cta-title { font-family: var(--serif); font-size: clamp(32px, 4vw, 54px); font-weight: 300; font-style: italic; color: var(--offwhite); line-height: 1.2; max-width: 600px; margin: 0 auto 16px; }
+    .cta-sub { font-size: 14px; color: var(--dimwhite); margin-bottom: 44px; line-height: 1.7; }
+    .btn-primary { display: inline-block; font-size: 14px; color: var(--offwhite); background: var(--accent); padding: 16px 44px; border-radius: var(--radius-pill); transition: opacity 0.2s, transform 0.15s; }
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: var(--canvas); border-top: 1px solid var(--border); padding: 52px 48px; margin-top: 96px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-logo { font-family: var(--cinzel); font-size: 11px; letter-spacing: 3px; color: var(--dimwhite); }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { font-size: 12px; color: var(--dimwhite); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--offwhite); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.10s; }
+    .reveal-d2 { transition-delay: 0.22s; }
+    .reveal-d3 { transition-delay: 0.34s; }
+    .reveal-d4 { transition-delay: 0.46s; }
+    .reveal-d5 { transition-delay: 0.58s; }
+
+    /* PLACEHOLDER IMAGE COLOURS */
+    .placeholder-1 { background: #3D3B30; }
+    .placeholder-2 { background: #38332C; }
+    .placeholder-3 { background: #312F26; }
+    .placeholder-4 { background: #3A3729; }
+    .placeholder-5 { background: #2F2D24; }
+
+    @media (max-width: 900px) {
+      #nav { padding: 18px 28px; }
+      .nav-links { display: none; }
+      .page-header { padding: 140px 28px 64px; }
+      .featured-section, .grid-section { padding-left: 28px; padding-right: 28px; }
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-img-wrap { aspect-ratio: 16/9; }
+      .featured-body { padding: 36px 32px; }
+      .articles-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .cta-section { margin: 64px 28px 0; padding: 64px 32px; }
+      footer { padding: 52px 28px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+    @media (max-width: 600px) {
+      .articles-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">RITUAL &amp; STONE</a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="articles.html">Journal</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Book a consultation</a>
+  </nav>
+
+  <header class="page-header">
+    <span class="eyebrow-accent reveal">THE JOURNAL</span>
+    <h1 class="page-title reveal reveal-d1">Design, materials<br>&amp; the art of intention.</h1>
+    <p class="page-sub reveal reveal-d2">Insights on luxury bathroom design, material selection, and creating spaces that endure.</p>
+  </header>
+
+  <!-- FEATURED ARTICLE -->
+  <section class="featured-section">
+    <div class="featured-inner">
+      <div class="featured-card reveal">
+        <div class="featured-img-wrap">
+          <!-- Replace src with your featured article image -->
+          <div class="featured-img placeholder-1" style="height:100%;"></div>
+        </div>
+        <div class="featured-body">
+          <div class="article-meta">
+            <span class="article-tag">MATERIALS</span>
+            <span class="article-date">June 2026</span>
+          </div>
+          <h2 class="featured-title">The Five Questions to Ask Before You Choose a Single Tile</h2>
+          <p class="featured-excerpt">Most renovation regrets trace back to decisions made too quickly at the tile showroom. Before you fall in love with a surface finish, there are five fundamental questions that will save you thousands — and ensure your bathroom ages beautifully.</p>
+          <a href="#" class="read-more">READ ARTICLE</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE GRID -->
+  <section class="grid-section">
+    <div class="grid-inner">
+      <span class="grid-label reveal">MORE FROM THE JOURNAL</span>
+      <div class="articles-grid">
+
+        <div class="article-card reveal">
+          <div class="card-img-wrap">
+            <div class="card-img placeholder-2" style="height:100%;"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="article-tag">DESIGN</span>
+              <span class="article-date">May 2026</span>
+            </div>
+            <h3 class="card-title">Why Your Bathroom Deserves a Design Brief Before It Gets a Builder</h3>
+            <p class="card-excerpt">A builder can price and schedule what you give them. But without a clear design brief, you're both guessing — and guesses in a renovation are expensive.</p>
+            <a href="#" class="card-link">READ MORE</a>
+          </div>
+        </div>
+
+        <div class="article-card reveal reveal-d1">
+          <div class="card-img-wrap">
+            <div class="card-img placeholder-3" style="height:100%;"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="article-tag">TAPWARE</span>
+              <span class="article-date">April 2026</span>
+            </div>
+            <h3 class="card-title">Matte Black vs. Brushed Brass: How to Choose a Tapware Finish That Won't Date</h3>
+            <p class="card-excerpt">Both finishes are having a moment. But one of them will still look considered in ten years — and the answer depends entirely on the rest of your palette.</p>
+            <a href="#" class="card-link">READ MORE</a>
+          </div>
+        </div>
+
+        <div class="article-card reveal reveal-d2">
+          <div class="card-img-wrap">
+            <div class="card-img placeholder-4" style="height:100%;"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="article-tag">RENOVATION</span>
+              <span class="article-date">March 2026</span>
+            </div>
+            <h3 class="card-title">The Real Cost of a Luxury Bathroom Renovation in Australia (2026)</h3>
+            <p class="card-excerpt">Budgets are set, then blown. Here's an honest breakdown of where the money goes — and which decisions you absolutely cannot afford to rush.</p>
+            <a href="#" class="card-link">READ MORE</a>
+          </div>
+        </div>
+
+        <div class="article-card reveal reveal-d1">
+          <div class="card-img-wrap">
+            <div class="card-img placeholder-5" style="height:100%;"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="article-tag">MATERIALS</span>
+              <span class="article-date">February 2026</span>
+            </div>
+            <h3 class="card-title">Travertine, Marble, or Porcelain? A Practical Guide to Luxury Stone for Australian Homes</h3>
+            <p class="card-excerpt">Each stone has a personality, a maintenance profile, and a price point. This is the guide we wish every client had read before their first showroom visit.</p>
+            <a href="#" class="card-link">READ MORE</a>
+          </div>
+        </div>
+
+        <div class="article-card reveal reveal-d2">
+          <div class="card-img-wrap">
+            <div class="card-img placeholder-1" style="height:100%;"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="article-tag">DESIGN</span>
+              <span class="article-date">January 2026</span>
+            </div>
+            <h3 class="card-title">How to Create a Cohesive Bathroom Without Matching Everything</h3>
+            <p class="card-excerpt">The secret to a bathroom that looks designed — not decorated — is understanding the difference between coordination and repetition.</p>
+            <a href="#" class="card-link">READ MORE</a>
+          </div>
+        </div>
+
+        <div class="article-card reveal reveal-d3">
+          <div class="card-img-wrap">
+            <div class="card-img placeholder-2" style="height:100%;"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="article-tag">LIGHTING</span>
+              <span class="article-date">December 2025</span>
+            </div>
+            <h3 class="card-title">Bathroom Lighting Is an Afterthought for Most Renovators. Here's Why It Shouldn't Be.</h3>
+            <p class="card-excerpt">Lighting shapes how every surface, material, and finish reads in your space. Get it wrong and no amount of beautiful tile will save you.</p>
+            <a href="#" class="card-link">READ MORE</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section reveal" style="background: var(--canvas-card); border-radius: 20px; border: 1px solid var(--border); text-align: center; padding: 88px 48px; margin: 96px auto 0; max-width: var(--max-w);">
+    <span class="cta-eyebrow">READY TO BEGIN?</span>
+    <h2 class="cta-title">Your sanctuary is closer than you think.</h2>
+    <p class="cta-sub">Book a consultation and let's design your bathroom with intention — before a single tile is ordered.</p>
+    <a href="contact.html" class="btn-primary">Book a consultation</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">RITUAL &amp; STONE STUDIO</span>
+      <ul class="footer-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="articles.html">Journal</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 Ritual &amp; Stone Studio</span>
+    </div>
+  </footer>
+
+  <script>
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // Page transitions
+    document.body.style.opacity = '0';
+    window.addEventListener('load', () => {
+      document.body.style.transition = 'opacity 0.55s ease';
+      document.body.style.opacity = '1';
+    });
+    document.querySelectorAll('a[href]').forEach(link => {
+      const url = new URL(link.href, location.href);
+      if (url.origin === location.origin && !url.hash) {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const dest = link.href;
+          document.body.style.transition = 'opacity 0.35s ease';
+          document.body.style.opacity = '0';
+          setTimeout(() => { location.href = dest; }, 360);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
