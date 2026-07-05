@@ -134,6 +134,27 @@
     .reveal-d1 { transition-delay: 0.10s; }
     .reveal-d2 { transition-delay: 0.22s; }
 
+    /* SUCCESS POPUP */
+    .popup-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(28,26,18,0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .popup-overlay.open { opacity: 1; pointer-events: all; }
+    .popup-card {
+      background: var(--canvas-card); border: 1px solid rgba(200,196,178,0.12);
+      border-radius: 16px; padding: 56px 48px; max-width: 480px; width: 100%;
+      text-align: center;
+      transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .popup-overlay.open .popup-card { transform: translateY(0); }
+    .popup-bar { width: 32px; height: 1px; background: var(--accent); margin: 0 auto 32px; }
+    .popup-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 38px); font-weight: 300; font-style: italic; color: var(--offwhite); line-height: 1.2; margin-bottom: 16px; }
+    .popup-body { font-size: 14px; line-height: 1.75; color: var(--dimwhite); margin-bottom: 36px; }
+    .popup-close { display: inline-block; font-size: 13px; color: var(--offwhite); background: var(--accent); padding: 13px 36px; border-radius: var(--radius-pill); border: none; cursor: pointer; font-family: var(--sans); transition: opacity 0.2s; }
+    .popup-close:hover { opacity: 0.82; }
+
     @media (max-width: 900px) {
       :root { --section-pad: 80px 28px; }
       #nav { padding: 18px 28px; }
@@ -188,7 +209,7 @@
         <h2 class="form-block-title">Book a consultation</h2>
         <p class="form-block-desc">Tell us about your project and we'll follow up with availability and pricing within 24 hours.</p>
 
-        <form id="form-services" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST" novalidate>
+        <form id="form-services" action="https://formspree.io/f/mgojdvvr" method="POST" novalidate>
           <input type="hidden" name="_subject" value="[Warm: ASAP] Services &amp; Pricing Inquiry — Ritual &amp; Stone Studio">
           <input type="text" name="_gotcha" style="display:none">
 
@@ -223,7 +244,7 @@
         <h2 class="form-block-title">Send a message</h2>
         <p class="form-block-desc">Have a question or just want to say hello? We read every message and reply within 2 business days.</p>
 
-        <form id="form-general" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST" novalidate>
+        <form id="form-general" action="https://formspree.io/f/mpqgbwwb" method="POST" novalidate>
           <input type="hidden" name="_subject" value="[General] Inquiry — Ritual &amp; Stone Studio">
           <input type="text" name="_gotcha" style="display:none">
 
@@ -245,6 +266,16 @@
 
     </div>
   </section>
+
+  <!-- SUCCESS POPUP -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-card">
+      <div class="popup-bar"></div>
+      <h2 class="popup-title" id="popupTitle">Thank you.</h2>
+      <p class="popup-body" id="popupBody">We've received your message and will be in touch shortly.</p>
+      <button class="popup-close" id="popupClose">Close</button>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-inner">
@@ -280,6 +311,68 @@
         document.body.style.overflow = '';
       });
     });
+
+    // Popup
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupTitle   = document.getElementById('popupTitle');
+    const popupBody    = document.getElementById('popupBody');
+    const popupClose   = document.getElementById('popupClose');
+    let activeForm = null;
+
+    function showPopup(title, body, form) {
+      activeForm = form;
+      popupTitle.textContent = title;
+      popupBody.textContent  = body;
+      popupOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup() {
+      popupOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+      if (activeForm) { activeForm.reset(); activeForm = null; }
+    }
+
+    popupClose.addEventListener('click', closePopup);
+    popupOverlay.addEventListener('click', e => { if (e.target === popupOverlay) closePopup(); });
+
+    // AJAX form submission
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          const isServices = form.id === 'form-services';
+          showPopup(
+            isServices ? 'Your inquiry is on its way.' : 'Message received.',
+            isServices
+              ? 'Thank you for reaching out. We\'ll follow up with availability and pricing within 24 hours.'
+              : 'Thank you for getting in touch. We\'ll reply within 2 business days.',
+            form
+          );
+        } else {
+          alert('Something went wrong. Please try again or email us directly.');
+        }
+      } catch {
+        alert('Something went wrong. Please check your connection and try again.');
+      }
+
+      btn.disabled = false;
+      btn.textContent = form.id === 'form-services' ? 'Send inquiry' : 'Send message';
+    }
+
+    document.getElementById('form-services').addEventListener('submit', handleFormSubmit);
+    document.getElementById('form-general').addEventListener('submit', handleFormSubmit);
 
     // Page transitions
     document.body.style.opacity = '0';
