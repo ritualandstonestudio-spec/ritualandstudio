@@ -429,6 +429,14 @@
       });
     });
 
+    // Make entire cards clickable
+    document.querySelectorAll('.article-card, .featured-card').forEach(card => {
+      const link = card.querySelector('a[href]');
+      if (link) {
+        card.addEventListener('click', e => { if (e.target.tagName !== 'A') link.click(); });
+      }
+    });
+
     // Page transitions
     document.body.style.opacity = '0';
     window.addEventListener('load', () => {
