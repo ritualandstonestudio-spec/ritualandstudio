@@ -61,6 +61,19 @@
     .page-title { font-family: var(--serif); font-size: clamp(44px, 6vw, 76px); font-weight: 300; font-style: italic; color: var(--offwhite); line-height: 1.1; }
     .page-sub { font-size: 15px; color: var(--dimwhite); margin-top: 24px; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.75; }
 
+    /* FILTER BAR */
+    .filter-bar { padding: 48px 48px 0; display: flex; justify-content: center; }
+    .filter-inner { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .filter-btn {
+      font-size: 11px; letter-spacing: 2.5px; color: var(--dimwhite);
+      padding: 8px 20px; border-radius: var(--radius-pill);
+      border: 1px solid rgba(200,196,178,0.18); background: transparent;
+      cursor: pointer; transition: all 0.2s; font-family: var(--sans);
+    }
+    .filter-btn:hover { color: var(--offwhite); border-color: rgba(200,196,178,0.4); }
+    .filter-btn.active { color: var(--offwhite); background: var(--accent); border-color: var(--accent); }
+    .filter-hidden { display: none !important; }
+
     /* FEATURED ARTICLE */
     .featured-section { padding: 88px 48px 0; }
     .featured-inner { max-width: var(--max-w); margin: 0 auto; }
@@ -265,10 +278,22 @@
     <p class="page-sub reveal reveal-d2">Insights on luxury bathroom design, material selection, and creating spaces that endure.</p>
   </header>
 
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="MATERIALS">MATERIALS</button>
+      <button class="filter-btn" data-filter="DESIGN">DESIGN</button>
+      <button class="filter-btn" data-filter="TAPWARE">TAPWARE</button>
+      <button class="filter-btn" data-filter="RENOVATION">RENOVATION</button>
+      <button class="filter-btn" data-filter="LIGHTING">LIGHTING</button>
+    </div>
+  </div>
+
   <!-- FEATURED ARTICLE -->
-  <section class="featured-section">
+  <section class="featured-section" id="featuredSection">
     <div class="featured-inner">
-      <div class="featured-card reveal">
+      <div class="featured-card reveal" data-tag="MATERIALS">
         <div class="featured-img-wrap">
           <!-- Replace src with your featured article image -->
           <div class="featured-img placeholder-1" style="height:100%;"></div>
@@ -292,7 +317,7 @@
       <span class="grid-label reveal">MORE FROM THE JOURNAL</span>
       <div class="articles-grid">
 
-        <div class="article-card reveal">
+        <div class="article-card reveal" data-tag="DESIGN">
           <div class="card-img-wrap">
             <div class="card-img placeholder-2" style="height:100%;"></div>
           </div>
@@ -307,7 +332,7 @@
           </div>
         </div>
 
-        <div class="article-card reveal reveal-d1">
+        <div class="article-card reveal reveal-d1" data-tag="TAPWARE">
           <div class="card-img-wrap">
             <div class="card-img placeholder-3" style="height:100%;"></div>
           </div>
@@ -322,7 +347,7 @@
           </div>
         </div>
 
-        <div class="article-card reveal reveal-d2">
+        <div class="article-card reveal reveal-d2" data-tag="RENOVATION">
           <div class="card-img-wrap">
             <div class="card-img placeholder-4" style="height:100%;"></div>
           </div>
@@ -337,7 +362,7 @@
           </div>
         </div>
 
-        <div class="article-card reveal reveal-d1">
+        <div class="article-card reveal reveal-d1" data-tag="MATERIALS">
           <div class="card-img-wrap">
             <div class="card-img placeholder-5" style="height:100%;"></div>
           </div>
@@ -352,7 +377,7 @@
           </div>
         </div>
 
-        <div class="article-card reveal reveal-d2">
+        <div class="article-card reveal reveal-d2" data-tag="DESIGN">
           <div class="card-img-wrap">
             <div class="card-img placeholder-1" style="height:100%;"></div>
           </div>
@@ -367,7 +392,7 @@
           </div>
         </div>
 
-        <div class="article-card reveal reveal-d3">
+        <div class="article-card reveal reveal-d3" data-tag="LIGHTING">
           <div class="card-img-wrap">
             <div class="card-img placeholder-2" style="height:100%;"></div>
           </div>
@@ -426,6 +451,26 @@
         mobileMenu.classList.remove('open');
         hamburger.classList.remove('open');
         document.body.style.overflow = '';
+      });
+    });
+
+    // Tag filtering
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        const featured = document.getElementById('featuredSection');
+        const featuredCard = featured.querySelector('.featured-card');
+        if (filter === 'all') {
+          featured.classList.remove('filter-hidden');
+          document.querySelectorAll('.article-card').forEach(c => c.classList.remove('filter-hidden'));
+        } else {
+          featured.classList.toggle('filter-hidden', featuredCard.dataset.tag !== filter);
+          document.querySelectorAll('.article-card').forEach(c => {
+            c.classList.toggle('filter-hidden', c.dataset.tag !== filter);
+          });
+        }
       });
     });
 
