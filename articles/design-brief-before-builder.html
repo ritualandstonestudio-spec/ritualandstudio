@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Your Bathroom Deserves a Design Brief Before It Gets a Builder — Ritual & Stone Studio</title>
+  <meta name="description" content="A builder can price and schedule what you give them. But without a clear design brief, you're both guessing — and guesses in a renovation are expensive.">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas: #2A2820; --canvas-card: #353325; --cream: #EEEAE1; --cream-mid: #DDD8CE;
+      --text-dark: #3C3926; --text-mid: #6B6453; --text-muted: #9B9482;
+      --accent: #8B6B48; --offwhite: #F0EDE5; --dimwhite: #C8C4B2;
+      --olive-subtle: rgba(255,255,255,0.06);
+      --cinzel: 'Cinzel','Times New Roman',serif;
+      --serif: 'Cormorant Garamond',Georgia,serif;
+      --sans: 'DM Sans',system-ui,sans-serif;
+      --radius-card: 12px; --radius-pill: 40px; --max-w: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--canvas); color: var(--cream); font-family: var(--sans); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    h1,h2,h3,h4 { font-weight: 400; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 22px 48px; display: flex; align-items: center; justify-content: space-between; background: rgba(42,40,32,0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .nav-logo { font-family: var(--cinzel); font-size: 12px; letter-spacing: 3.5px; color: var(--offwhite); }
+    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--dimwhite); padding: 8px 18px; border-radius: var(--radius-pill); transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--offwhite); background: var(--olive-subtle); }
+    .nav-cta { font-size: 13px; color: var(--offwhite); background: var(--accent); padding: 10px 26px; border-radius: var(--radius-pill); transition: opacity 0.2s, transform 0.15s; }
+    .nav-cta:hover { opacity: 0.82; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; z-index: 300; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--offwhite); transition: transform 0.35s ease, opacity 0.25s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu { position: fixed; inset: 0; z-index: 190; background: var(--canvas); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu-tag { font-size: 9px; letter-spacing: 4px; color: var(--dimwhite); margin-bottom: 52px; }
+    .mobile-menu-links { list-style: none; text-align: center; margin-bottom: 52px; }
+    .mobile-menu-links li + li { margin-top: 8px; }
+    .mobile-menu-links a { font-family: var(--serif); font-size: clamp(36px,10vw,52px); font-weight: 300; font-style: italic; color: var(--offwhite); transition: color 0.2s; display: block; padding: 8px 0; }
+    .mobile-menu-links a:hover { color: var(--accent); }
+    .mobile-menu-cta { font-size: 13px; color: var(--offwhite); background: var(--accent); padding: 14px 40px; border-radius: var(--radius-pill); transition: opacity 0.2s; }
+    .article-hero { padding: 160px 48px 72px; max-width: 860px; margin: 0 auto; }
+    .back-link { font-size: 12px; letter-spacing: 2px; color: var(--accent); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 48px; transition: opacity 0.2s; }
+    .back-link:hover { opacity: 0.7; }
+    .article-tag { font-size: 10px; letter-spacing: 4px; color: var(--accent); display: block; margin-bottom: 20px; }
+    .article-title { font-family: var(--serif); font-size: clamp(36px,5vw,62px); font-weight: 300; font-style: italic; color: var(--offwhite); line-height: 1.15; margin-bottom: 24px; }
+    .article-meta { font-size: 12px; color: var(--dimwhite); letter-spacing: 1px; }
+    .article-body { max-width: 720px; margin: 0 auto; padding: 56px 48px 96px; }
+    .article-body p { font-size: 16px; line-height: 1.85; color: var(--dimwhite); margin-bottom: 28px; }
+    .article-body h2 { font-family: var(--serif); font-size: clamp(24px,2.8vw,34px); font-weight: 300; font-style: italic; color: var(--offwhite); margin: 56px 0 20px; }
+    .article-body h3 { font-family: var(--serif); font-size: clamp(20px,2.2vw,26px); font-weight: 300; font-style: italic; color: var(--offwhite); margin: 40px 0 16px; }
+    .article-body strong { color: var(--offwhite); font-weight: 500; }
+    .article-body ul, .article-body ol { padding-left: 24px; margin-bottom: 28px; }
+    .article-body li { font-size: 16px; line-height: 1.85; color: var(--dimwhite); margin-bottom: 8px; }
+    .article-divider { width: 36px; height: 1px; background: var(--accent); margin: 56px 0; }
+    .article-cta { background: var(--canvas-card); border: 1px solid rgba(200,196,178,0.12); border-radius: 16px; padding: 56px 48px; text-align: center; max-width: 720px; margin: 0 auto 96px; }
+    .article-cta-eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--accent); display: block; margin-bottom: 16px; }
+    .article-cta-title { font-family: var(--serif); font-size: clamp(26px,3vw,38px); font-weight: 300; font-style: italic; color: var(--offwhite); margin-bottom: 16px; }
+    .article-cta-body { font-size: 14px; color: var(--dimwhite); line-height: 1.7; margin-bottom: 32px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .btn-primary { display: inline-block; font-size: 13px; color: var(--offwhite); background: var(--accent); padding: 14px 36px; border-radius: var(--radius-pill); transition: opacity 0.2s, transform 0.15s; }
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-1px); }
+    footer { background: var(--canvas); border-top: 1px solid rgba(200,196,178,0.1); padding: 52px 48px; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-logo { font-family: var(--cinzel); font-size: 11px; letter-spacing: 3px; color: var(--dimwhite); }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { font-size: 12px; color: var(--dimwhite); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--offwhite); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+    @media (max-width: 900px) {
+      #nav { padding: 18px 28px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .article-hero { padding: 140px 28px 56px; }
+      .article-body { padding: 40px 28px 72px; }
+      .article-cta { padding: 40px 28px; margin: 0 28px 72px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <a href="../index.html" class="nav-logo">RITUAL &amp; STONE</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#services">Services</a></li>
+      <li><a href="../articles.html">Journal</a></li>
+    </ul>
+    <a href="../contact.html" class="nav-cta">Contact us</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <p class="mobile-menu-tag">RITUAL &amp; STONE STUDIO</p>
+    <ul class="mobile-menu-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#services">Services</a></li>
+      <li><a href="../articles.html">Journal</a></li>
+    </ul>
+    <a href="../contact.html" class="mobile-menu-cta">Book a consultation</a>
+  </div>
+
+  <div class="article-hero">
+    <a href="../articles.html" class="back-link">&#8592; BACK TO JOURNAL</a>
+    <span class="article-tag">DESIGN</span>
+    <h1 class="article-title">Why Your Bathroom Deserves a Design Brief Before It Gets a Builder</h1>
+    <p class="article-meta">May 2026 &nbsp;·&nbsp; 5 min read</p>
+  </div>
+
+  <div class="article-body">
+    <p>A builder can price what you give them. They can schedule it, waterproof it, tile it, and hand it back to you. What they cannot do is tell you whether you will love it in five years. That part was always your job. Most people just do not realise it until the builder has already started.</p>
+
+    <p>A design brief is not a luxury reserved for architects and interior designers. It is the single document that separates a bathroom renovation that feels considered from one that feels like a series of decisions made under pressure.</p>
+
+    <h2>What a design brief actually is</h2>
+
+    <p>A design brief is a written and visual document that answers four questions before any work begins: What does this bathroom need to do? How does it need to feel? What materials and finishes are we working with? And what does success look like?</p>
+
+    <p>It does not need to be a 40-page document. It can be a mood board, a written summary of your tile selections, a clear description of your preferred colour palette, and a note about your storage priorities. The specifics matter less than the clarity it creates.</p>
+
+    <h2>What happens without one</h2>
+
+    <p>Without a brief, every decision gets made twice. Once in theory, during the planning phase, and once again in reality, when the builder is on site and needs an answer immediately. The second version of those decisions is almost always more expensive and less considered than the first.</p>
+
+    <p>Variations are where renovation budgets go. A variation is anything that changes after the contract is signed. Last-minute tile substitutions, layout changes, fixture upgrades mid-build. Each one attracts a cost. Each one happens because something was not decided clearly enough before the work began.</p>
+
+    <p>A design brief does not eliminate all variations. But it eliminates the ones that come from indecision.</p>
+
+    <h2>What a good brief gives your builder</h2>
+
+    <p>When you hand a builder a clear brief, you change the nature of the conversation entirely. Instead of asking them to make decisions they are not qualified to make, you are giving them clear parameters to price and execute. They know what tile is going where. They know what tapware they are installing. They know the layout is confirmed.</p>
+
+    <p>That clarity is worth money. Builders price uncertainty. When they do not know what they are installing, they price conservatively. When you remove the uncertainty, you give them the confidence to price accurately.</p>
+
+    <h2>What a brief does for you</h2>
+
+    <p>It forces the hard decisions early, when changing your mind costs nothing. It creates a reference point when you are standing in a showroom four months into the project, exhausted and over it, and someone tries to sell you something that does not belong in your bathroom. And it gives you something to return to when the process feels overwhelming, because the brief reminds you exactly what you are building and why.</p>
+
+    <div class="article-divider"></div>
+
+    <p>The best renovations are not the ones with the biggest budgets. They are the ones where every decision was made before the first tradie arrived. A design brief is how that happens.</p>
+  </div>
+
+  <div class="article-cta">
+    <span class="article-cta-eyebrow">WORK WITH US</span>
+    <h2 class="article-cta-title">We help you build your brief before you build your bathroom.</h2>
+    <p class="article-cta-body">From a single direction call to a complete design plan, we give you the clarity you need before the work begins.</p>
+    <a href="../contact.html" class="btn-primary">Book a consultation</a>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">RITUAL &amp; STONE STUDIO</span>
+      <ul class="footer-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#services">Services</a></li>
+        <li><a href="../articles.html">Journal</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 Ritual &amp; Stone Studio</span>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+    document.body.style.opacity = '0';
+    window.addEventListener('load', () => {
+      document.body.style.transition = 'opacity 0.55s ease';
+      document.body.style.opacity = '1';
+    });
+    document.querySelectorAll('a[href]').forEach(link => {
+      const url = new URL(link.href, location.href);
+      if (url.origin === location.origin && !url.hash) {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const dest = link.href;
+          document.body.style.transition = 'opacity 0.35s ease';
+          document.body.style.opacity = '0';
+          setTimeout(() => { location.href = dest; }, 360);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
