@@ -211,7 +211,7 @@
 
   <section id="hero">
     <div class="hero-sticky">
-      <video id="heroVideo" src="RitualAndStone_Hero_v2.mp4" autoplay muted playsinline loop preload="auto"></video>
+      <video id="heroVideo" src="RitualAndStone_Hero_v2.mp4" autoplay muted playsinline preload="auto"></video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-eyebrow">RITUAL &amp; STONE STUDIO &nbsp;·&nbsp; AUSTRALIA</p>
@@ -340,17 +340,11 @@
     const heroSection = document.getElementById('hero');
     const heroScroll  = document.getElementById('heroScroll');
 
-    const isMobile = window.matchMedia('(max-width: 900px)').matches;
-
     heroVideo.addEventListener('canplay', () => { heroScroll.classList.add('show'); });
     heroVideo.addEventListener('loadedmetadata', () => {
-      if (isMobile) {
-        heroVideo.play();
-      } else {
-        heroVideo.currentTime = 0;
-        heroVideo.pause();
-        window.addEventListener('scroll', onHeroScroll, { passive: true });
-      }
+      heroVideo.currentTime = 0;
+      heroVideo.pause();
+      window.addEventListener('scroll', onHeroScroll, { passive: true });
     });
 
     let rafPending = false;
